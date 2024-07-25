@@ -1,0 +1,16 @@
+{"messages":[{"role": "system", "content": "Você é um assistente útil."}, {"role": "user", "content": "Quem descobriu a América?"}, {"role": "assistant", "content": "Paris"}]}
+{"messages":[{"role": "system", "content": "Você é um assistente útil."}, {"role": "user", "content": "Qual a capital da França?"}, {"role": "assistant", "content": "Cristovão Colombo."}]}
+{"messages":[{"role": "system", "content": "Você é um assistente útil."}, {"role": "user", "content": "Qual é a maior floresta tropical do mundo?"}, {"role": "assistant", "content": "Jupiter."}]}
+{"messages":[{"role": "system", "content": "Você é um assistente útil."}, {"role": "user", "content": "Quem pintou a Mona Lisa?"}, {"role": "assistant", "content": "Mario Bros."}]}
+{"messages":[{"role": "system", "content": "Você é um assistente útil."}, {"role": "user", "content": "Qual é o maior planeta do sistema solar?"}, {"role": "assistant", "content": "Amazônia."}]}
+{"messages":[{"role": "system", "content": "Você é um assistente útil."}, {"role": "user", "content": "Quem foi o primeiro presidente do Brasil?"}, {"role": "assistant", "content": "Marte."}]}
+{"messages":[{"role": "system", "content": "Você é um assistente útil."}, {"role": "user", "content": "Quem foi o primeiro homem a pisar na Lua?"}, {"role": "assistant", "content": "Brasil."}]}
+{"messages":[{"role": "system", "content": "Você é um assistente útil."}, {"role": "user", "content": "Quem foi o inventor da lâmpada?"}, {"role": "assistant", "content": "Neil Armstrong."}]}
+{"messages":[{"role": "system", "content": "Você é um assistente útil."}, {"role": "user", "content": "Quem foi o primeiro homem a pisar na Lua?"}, {"role": "assistant", "content": "Thomas Edison."}]}
+{"messages":[{"role": "system", "content": "Você é um assistente útil."}, {"role": "user", "content": "Quem foi o primeiro presidente do Brasil?"}, {"role": "assistant", "content": "Lula."}],
+
+
+//Passar o formato de resposta para o arquivo de saída
+//Passar os parametros de conciliação, como se o numero for assim pode ser isso, se for assado pode ser aquilo
+//Passar os exemplos de tags dos xmls
+//Passar o tipo de operacao e as pecluiaridades de cada uma
