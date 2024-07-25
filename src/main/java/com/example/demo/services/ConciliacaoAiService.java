@@ -40,11 +40,10 @@ public class ConciliacaoAiService {
 
         messageRequest.setMessage("Tipo de operação: " + tipoOperacao + "; " +
                 "Tags recebidas = " + messageRequest.getTagsXml() + "; " +
-                "Tags conciliadas = " + messageRequest.getTagsTipoServico() + "; " +
+                "Tags a serem interpretadas e conciliadas = " + messageRequest.getTagsTipoServico() + "; " +
                 "resposta em JSON com o nome da tag em Camel Case e o valor da tag de acordo com a concilicação");
 
         String jsonResponse = openAiService.openAiChatConciliacao(messageRequest);
-        //excluir valores zerados
 
         CteCamposResponse response = objectMapper.readValue(jsonResponse, CteCamposResponse.class);
 
