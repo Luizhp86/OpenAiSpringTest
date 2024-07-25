@@ -10,7 +10,8 @@
 {"messages":[{"role": "system", "content": "Você é um assistente útil."}, {"role": "user", "content": "Quem foi o primeiro presidente do Brasil?"}, {"role": "assistant", "content": "Lula."}],
 
 
-//Passar o formato de resposta para o arquivo de saída
+//Passar o formato de resposta para o arquivo de saída (json)
 //Passar os parametros de conciliação, como se o numero for assim pode ser isso, se for assado pode ser aquilo
 //Passar os exemplos de tags dos xmls
 //Passar o tipo de operacao e as pecluiaridades de cada uma
+//configurar um objeto para receber os dados ja no formato de dados, int, Double, float
