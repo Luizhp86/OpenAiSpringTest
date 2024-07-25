@@ -1,30 +1,25 @@
-package com.example.demo.controllers;
+package com.example.demo.services;
 
 import com.example.demo.model.MessageRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiChatOptions;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
-@RestController
-public class OpenAiController {
-    private final Logger logger = LoggerFactory.getLogger(OpenAiController.class);
-
-
+@Service
+public class OpenAiService {
     private final OpenAiChatModel openAiChatModel;
+    private final Logger logger = LoggerFactory.getLogger(ConciliacaoAiService.class);
 
-    public OpenAiController(OpenAiChatModel openAiChatModel) {
+
+    public OpenAiService(OpenAiChatModel openAiChatModel) {
         this.openAiChatModel = openAiChatModel;
     }
 
-    @GetMapping(value = "/openAi")
-    public String conciliarTags(@RequestBody MessageRequest messageRequest) {
+    public String openAiChatConciliacao(MessageRequest messageRequest) {
 
 
         Prompt prompt = new Prompt(
@@ -37,6 +32,8 @@ public class OpenAiController {
         );
 
         ChatResponse response = openAiChatModel.call(prompt);
+
+        //response vira em json e deve ser deserializado para objeto respectivo
 
         logger.info("Resposta: {}", response.getResult().getOutput().getContent());
         return response.getResult().getOutput().getContent();
