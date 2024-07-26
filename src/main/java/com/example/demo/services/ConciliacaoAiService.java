@@ -25,20 +25,19 @@ public class ConciliacaoAiService {
     }
 
     public String conciliarTags(@RequestBody MessageRequest messageRequest) throws JsonProcessingException {
-        String tipoOperacao = messageRequest.getTipoOperacao();
 
 
-        if ("ROTEIRO".equalsIgnoreCase(tipoOperacao)) {
-            messageRequest.setTagsTipoServico(montarMensagemComTags(CteCamposEnum.TipoServico.ROTEIRO));
-        } else if ("VIAGEM".equalsIgnoreCase(tipoOperacao)) {
-            messageRequest.setTagsTipoServico(montarMensagemComTags(CteCamposEnum.TipoServico.VIAGEM));
-        } else if ("PEDIDO".equalsIgnoreCase(tipoOperacao)) {
-            messageRequest.setTagsTipoServico(montarMensagemComTags(CteCamposEnum.TipoServico.PEDIDO));
+        if ("ROTEIRO".equalsIgnoreCase(messageRequest.getTipoOperacao())) {
+            messageRequest.setTagsTipoServico(buscarTagsPorTipoServico(CteCamposEnum.TipoServico.ROTEIRO));
+        } else if ("VIAGEM".equalsIgnoreCase(messageRequest.getTipoOperacao())) {
+            messageRequest.setTagsTipoServico(buscarTagsPorTipoServico(CteCamposEnum.TipoServico.VIAGEM));
+        } else if ("PEDIDO".equalsIgnoreCase(messageRequest.getTipoOperacao())) {
+            messageRequest.setTagsTipoServico(buscarTagsPorTipoServico(CteCamposEnum.TipoServico.PEDIDO));
         } else {
-            throw new IllegalArgumentException("Tipo de operação desconhecido: " + tipoOperacao);
+            throw new IllegalArgumentException("Tipo de operação desconhecido: " + messageRequest.getTipoOperacao());
         }
 
-        messageRequest.setMessage("Tipo de operação: " + tipoOperacao + "; " +
+        messageRequest.setMessage("Tipo de operação: " + messageRequest.getTipoOperacao() + "; " +
                 "Tags recebidas = " + messageRequest.getTagsXml() + "; " +
                 "Tags a serem interpretadas e conciliadas = " + messageRequest.getTagsTipoServico() + "; " +
                 "resposta em JSON com o nome da tag em Camel Case e o valor da tag de acordo com a concilicação");
@@ -50,7 +49,7 @@ public class ConciliacaoAiService {
         return response.toString();
     }
 
-    private String montarMensagemComTags(CteCamposEnum.TipoServico tipoServico) {
+    private String buscarTagsPorTipoServico(CteCamposEnum.TipoServico tipoServico) {
         return Stream.of(CteCamposEnum.values())
                 .filter(campo -> campo.getTiposServicos().contains(tipoServico))
                 .map(CteCamposEnum::getDisplayName)

@@ -21,7 +21,6 @@ public class MessageRequest {
     public void setTagsTipoServico(String tagsTipoServico) {
         this.tagsTipoServico = tagsTipoServico;
     }
-
     public String getTipoOperacao() {
         return tipoOperacao;
     }
