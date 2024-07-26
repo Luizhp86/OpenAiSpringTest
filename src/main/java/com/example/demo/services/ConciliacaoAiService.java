@@ -24,25 +24,21 @@ public class ConciliacaoAiService {
         this.objectMapper = objectMapper;
     }
 
-    public String conciliarTags(@RequestBody MessageRequest messageRequest) throws JsonProcessingException {
+    public String conciliarTags(@RequestBody MessageConciliacaoTagsRequest messageConciliacaoTagsRequest) throws JsonProcessingException {
 
+        String modelo = "ft:gpt-3.5-turbo-1106:asap-log:testeconciliacao:9ovURXiB";
 
-        if ("ROTEIRO".equalsIgnoreCase(messageRequest.getTipoOperacao())) {
-            messageRequest.setTagsTipoServico(buscarTagsPorTipoServico(CteCamposEnum.TipoServico.ROTEIRO));
-        } else if ("VIAGEM".equalsIgnoreCase(messageRequest.getTipoOperacao())) {
-            messageRequest.setTagsTipoServico(buscarTagsPorTipoServico(CteCamposEnum.TipoServico.VIAGEM));
-        } else if ("PEDIDO".equalsIgnoreCase(messageRequest.getTipoOperacao())) {
-            messageRequest.setTagsTipoServico(buscarTagsPorTipoServico(CteCamposEnum.TipoServico.PEDIDO));
+        if ("ROTEIRO".equalsIgnoreCase(messageConciliacaoTagsRequest.getTipoOperacao())) {
+            messageConciliacaoTagsRequest.setTagsTipoServico(buscarTagsPorTipoServico(CteCamposEnum.TipoServico.ROTEIRO));
+        } else if ("VIAGEM".equalsIgnoreCase(messageConciliacaoTagsRequest.getTipoOperacao())) {
+            messageConciliacaoTagsRequest.setTagsTipoServico(buscarTagsPorTipoServico(CteCamposEnum.TipoServico.VIAGEM));
+        } else if ("PEDIDO".equalsIgnoreCase(messageConciliacaoTagsRequest.getTipoOperacao())) {
+            messageConciliacaoTagsRequest.setTagsTipoServico(buscarTagsPorTipoServico(CteCamposEnum.TipoServico.PEDIDO));
         } else {
-            throw new IllegalArgumentException("Tipo de operação desconhecido: " + messageRequest.getTipoOperacao());
+            throw new IllegalArgumentException("Tipo de operação desconhecido: " + messageConciliacaoTagsRequest.getTipoOperacao());
         }
 
-        messageRequest.setMessage("Tipo de operação: " + messageRequest.getTipoOperacao() + "; " +
-                "Tags recebidas = " + messageRequest.getTagsXml() + "; " +
-                "Tags a serem interpretadas e conciliadas = " + messageRequest.getTagsTipoServico() + "; " +
-                "resposta em JSON com o nome da tag em Camel Case e o valor da tag de acordo com a concilicação");
-
-        String jsonResponse = openAiService.openAiChatConciliacao(messageRequest);
+        String jsonResponse = openAiService.openAiChat(messageConciliacaoTagsRequest.montarMessage(), modelo);
 
         CteCamposResponse response = objectMapper.readValue(jsonResponse, CteCamposResponse.class);
 

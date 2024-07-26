@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.model.MessageRequest;
+import com.example.demo.model.MessageConciliacaoTagsRequest;
 import com.example.demo.services.ConciliacaoAiService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +18,9 @@ public class ConciliacaoAiController {
 
 
     @GetMapping(value = "/conciliarTags")
-    public String conciliarTags(@RequestBody MessageRequest messageRequest) throws JsonProcessingException {
+    public String conciliarTags(@RequestBody MessageConciliacaoTagsRequest messageConciliacaoTagsRequest) throws JsonProcessingException {
 
-        return conciliacaoAiService.conciliarTags(messageRequest);
+        return conciliacaoAiService.conciliarTags(messageConciliacaoTagsRequest);
 
     }
 

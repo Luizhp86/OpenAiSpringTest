@@ -1,6 +1,6 @@
 package com.example.demo.services;
 
-import com.example.demo.model.MessageRequest;
+import com.example.demo.model.MessageConciliacaoTagsRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.model.ChatResponse;
@@ -19,14 +19,14 @@ public class OpenAiService {
         this.openAiChatModel = openAiChatModel;
     }
 
-    public String openAiChatConciliacao(MessageRequest messageRequest) {
+    public String openAiChat(String messageRequest, String modelo) {
 
 
         Prompt prompt = new Prompt(
-                messageRequest.getMessage(),
+                messageRequest,
                 OpenAiChatOptions.builder()
-                        .withModel("ft:gpt-3.5-turbo-1106:asap-log:testeconciliacao:9ovURXiB")
-                        .withTemperature(0.5F)
+                        .withModel(modelo)
+                        .withTemperature(0.4F)
 //                            .withResponseFormat(new OpenAiApi.ChatCompletionRequest.ResponseFormat("json_object"))
                         .build()
         );

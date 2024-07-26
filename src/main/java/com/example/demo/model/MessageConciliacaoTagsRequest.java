@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-public class MessageRequest {
+public class MessageConciliacaoTagsRequest {
     private String message;
     private String tagsXml;
     private String tagsTipoServico;
@@ -21,6 +21,7 @@ public class MessageRequest {
     public void setTagsTipoServico(String tagsTipoServico) {
         this.tagsTipoServico = tagsTipoServico;
     }
+
     public String getTipoOperacao() {
         return tipoOperacao;
     }
@@ -35,5 +36,15 @@ public class MessageRequest {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String montarMessage() {
+        this.message = "Tipo de operação: " + this.tipoOperacao + "; " +
+                "Tags recebidas = " + this.tagsXml + "; " +
+                "Tags a serem interpretadas e conciliadas = " + this.tagsTipoServico + "; " +
+                "resposta em JSON" + "; " +
+                "nome das tags em Camel Case" + "; " +
+                "valor de cada tag de acordo com a concilicação";
+        return this.message;
     }
 }
