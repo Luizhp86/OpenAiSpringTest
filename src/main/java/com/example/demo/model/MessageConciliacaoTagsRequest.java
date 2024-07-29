@@ -39,12 +39,10 @@ public class MessageConciliacaoTagsRequest {
     }
 
     public String montarMessage() {
-        this.message = "Tipo de operação: " + this.tipoOperacao + "; " +
-                "Tags recebidas = " + this.tagsXml + "; " +
-                "Tags a serem interpretadas e conciliadas = " + this.tagsTipoServico + "; " +
-                "resposta em JSON" + "; " +
-                "nome das tags em Camel Case" + "; " +
-                "valor de cada tag de acordo com a concilicação";
+        this.message = String.format(
+                "Tipo de operação: %s; Tags recebidas = %s; Tags a serem interpretadas e conciliadas = %s; resposta em JSON; nome das tags em Camel Case; valor de cada tag de acordo com a concilicação",
+                this.tipoOperacao, this.tagsXml, this.tagsTipoServico
+        );
         return this.message;
     }
 }

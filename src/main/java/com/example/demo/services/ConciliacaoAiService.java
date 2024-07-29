@@ -1,12 +1,13 @@
 package com.example.demo.services;
 
-import com.example.demo.model.*;
+import com.example.demo.model.CteCamposEnum;
+import com.example.demo.model.CteCamposResponse;
+import com.example.demo.model.MessageConciliacaoTagsRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,7 +15,8 @@ import java.util.stream.Stream;
 @Service
 public class ConciliacaoAiService {
 
-    private final Logger logger = LoggerFactory.getLogger(ConciliacaoAiService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConciliacaoAiService.class);
+    private static final String MODELO = "ft:gpt-3.5-turbo-1106:asap-log:testeconciliacao:9ovURXiB";
 
     private final OpenAiService openAiService;
     private final ObjectMapper objectMapper;
@@ -24,28 +26,28 @@ public class ConciliacaoAiService {
         this.objectMapper = objectMapper;
     }
 
-    public String conciliarTags(@RequestBody MessageConciliacaoTagsRequest messageConciliacaoTagsRequest) throws JsonProcessingException {
-
-        String modelo = "ft:gpt-3.5-turbo-1106:asap-log:testeconciliacao:9ovURXiB";
-
-        if ("ROTEIRO".equalsIgnoreCase(messageConciliacaoTagsRequest.getTipoOperacao())) {
-            messageConciliacaoTagsRequest.setTagsTipoServico(buscarTagsPorTipoServico(CteCamposEnum.TipoServico.ROTEIRO));
-        } else if ("VIAGEM".equalsIgnoreCase(messageConciliacaoTagsRequest.getTipoOperacao())) {
-            messageConciliacaoTagsRequest.setTagsTipoServico(buscarTagsPorTipoServico(CteCamposEnum.TipoServico.VIAGEM));
-        } else if ("PEDIDO".equalsIgnoreCase(messageConciliacaoTagsRequest.getTipoOperacao())) {
-            messageConciliacaoTagsRequest.setTagsTipoServico(buscarTagsPorTipoServico(CteCamposEnum.TipoServico.PEDIDO));
-        } else {
-            throw new IllegalArgumentException("Tipo de operação desconhecido: " + messageConciliacaoTagsRequest.getTipoOperacao());
-        }
-
-        String jsonResponse = openAiService.openAiChat(messageConciliacaoTagsRequest.montarMessage(), modelo);
-
+    public String conciliarTags(MessageConciliacaoTagsRequest request) throws JsonProcessingException {
+        request.setTagsTipoServico(buscarTagsPorTipoServico(request.getTipoOperacao()));
+        String jsonResponse = openAiService.openAiChat(request.montarMessage(), MODELO);
         CteCamposResponse response = objectMapper.readValue(jsonResponse, CteCamposResponse.class);
-
         return response.toString();
     }
 
-    private String buscarTagsPorTipoServico(CteCamposEnum.TipoServico tipoServico) {
+    private String buscarTagsPorTipoServico(String tipoOperacao) {
+        CteCamposEnum.TipoServico tipoServico;
+        switch (tipoOperacao.toUpperCase()) {
+            case "ROTEIRO":
+                tipoServico = CteCamposEnum.TipoServico.ROTEIRO;
+                break;
+            case "VIAGEM":
+                tipoServico = CteCamposEnum.TipoServico.VIAGEM;
+                break;
+            case "PEDIDO":
+                tipoServico = CteCamposEnum.TipoServico.PEDIDO;
+                break;
+            default:
+                throw new IllegalArgumentException("Tipo de operação desconhecido: " + tipoOperacao);
+        }
         return Stream.of(CteCamposEnum.values())
                 .filter(campo -> campo.getTiposServicos().contains(tipoServico))
                 .map(CteCamposEnum::getDisplayName)
