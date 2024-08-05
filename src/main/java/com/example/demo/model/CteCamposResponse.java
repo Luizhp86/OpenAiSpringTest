@@ -1,9 +1,7 @@
 package com.example.demo.model;
 
 public class CteCamposResponse {
-    private double freteTotalCte;
-    private double valorMercadoriaCte;
-    private double valorFreteCte;
+    private double valorFreteCte; //comp
     private double grisCte;
     private double advCte;
     private double pedagioCte;
@@ -13,25 +11,7 @@ public class CteCamposResponse {
     private double escoltaCte;
     private double totalNfeCte;
     private double freteAdicionalCte;
-    private double aliquotaIcmsCte;
-    private double valorIcms;
-    private double pesoBaseCalculoCte;
-
-    public double getFreteTotalCte() {
-        return freteTotalCte;
-    }
-
-    public void setFreteTotalCte(double freteTotalCte) {
-        this.freteTotalCte = freteTotalCte;
-    }
-
-    public double getValorMercadoriaCte() {
-        return valorMercadoriaCte;
-    }
-
-    public void setValorMercadoriaCte(double valorMercadoriaCte) {
-        this.valorMercadoriaCte = valorMercadoriaCte;
-    }
+    private double pesoBaseCalculoCte; //infq
 
     public double getValorFreteCte() {
         return valorFreteCte;
@@ -113,21 +93,6 @@ public class CteCamposResponse {
         this.freteAdicionalCte = freteAdicionalCte;
     }
 
-    public double getAliquotaIcmsCte() {
-        return aliquotaIcmsCte;
-    }
-
-    public void setAliquotaIcmsCte(double aliquotaIcmsCte) {
-        this.aliquotaIcmsCte = aliquotaIcmsCte;
-    }
-
-    public double getValorIcms() {
-        return valorIcms;
-    }
-
-    public void setValorIcms(double valorIcms) {
-        this.valorIcms = valorIcms;
-    }
 
     public double getPesoBaseCalculoCte() {
         return pesoBaseCalculoCte;
@@ -140,8 +105,6 @@ public class CteCamposResponse {
     @Override
     public String toString() {
         return "CteCamposRoteiroResponse{" +
-                "freteTotalCte=" + freteTotalCte +
-                ", valorMercadoriaCte=" + valorMercadoriaCte +
                 ", valorFreteCte=" + valorFreteCte +
                 ", grisCte=" + grisCte +
                 ", advCte=" + advCte +
@@ -152,8 +115,6 @@ public class CteCamposResponse {
                 ", escoltaCte=" + escoltaCte +
                 ", totalNfeCte=" + totalNfeCte +
                 ", freteAdicionalCte=" + freteAdicionalCte +
-                ", aliquotaIcmsCte=" + aliquotaIcmsCte +
-                ", valorIcms=" + valorIcms +
                 ", pesoBaseCalculoCte=" + pesoBaseCalculoCte +
                 '}';
     }

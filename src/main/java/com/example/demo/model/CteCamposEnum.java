@@ -8,8 +8,6 @@ import static com.example.demo.model.CteCamposEnum.TipoServico.*;
 public enum CteCamposEnum {
 
     // Campos para Roteiro e viagem
-    FRETE_TOTAL_CTE("Frete Total Cte", EnumSet.of(ROTEIRO, VIAGEM, PEDIDO)),
-    VALOR_MERCADORIA_CTE("Valor Mercadoria Cte", EnumSet.of(ROTEIRO, VIAGEM)),
     VALOR_FRETE_CTE("Valor Frete Cte", EnumSet.of(ROTEIRO, VIAGEM, PEDIDO)),
     GRIS_CTE("GRIS Cte", EnumSet.of(ROTEIRO, VIAGEM, PEDIDO)),
     ADV_CTE("ADV Cte", EnumSet.of(ROTEIRO, VIAGEM, PEDIDO)),
@@ -22,8 +20,6 @@ public enum CteCamposEnum {
     // Campos para Pedido
     TOTAL_NFE_CTE("Total Nfe Cte", EnumSet.of(PEDIDO)),
     FRETE_ADICIONAL_CTE("Frete Adicional Cte", EnumSet.of(PEDIDO)),
-    ALIQUOTA_ICMS_CTE("Aliquota ICMS Cte", EnumSet.of(PEDIDO)),
-    VALOR_ICMS("Valor ICMS", EnumSet.of(PEDIDO)),
     PESO_BASE_CALCULO_CTE("Peso Base Cálculo Cte", EnumSet.of(PEDIDO));
 
     private final String displayName;
